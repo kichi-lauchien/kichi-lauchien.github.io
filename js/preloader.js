@@ -116,14 +116,15 @@ TH.Preloader.prototype =
         }
         else
         {
-            this.load.audio('bg_music', 'sound/bg_music.ogg');
-            this.load.audio('shoot', 'sound/shoot.ogg');
-            this.load.audio('blash', 'sound/blash.ogg');
-            this.load.audio('coin', 'sound/smb_coin.ogg');
+            this.load.audio('bg_music', 'sound/bg_music.mp3');
+            this.load.audio('shoot', 'sound/shoot.mp3');
+            this.load.audio('blash', 'sound/blash.mp3');
+            this.load.audio('coin', 'sound/smb_coin.mp3');
         }        
     }, 
     create: function()
     {   
+        game.sound.setTouchLock();
         game.state.start("MainMenu");
     }
 };

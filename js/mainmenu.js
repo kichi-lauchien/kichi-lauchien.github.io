@@ -55,6 +55,13 @@ TH.MainMenu.prototype =
     preload: function()
     {
         
+    },
+    update: function()
+    {
+        if (game.input.activePointer.isDown)
+        {
+            game.sound.unlock();     
+        }
     }, 
     create: function()
     {         
@@ -235,10 +242,7 @@ TH.MainMenu.prototype =
         });
     },
     onClickOnBtnFB: function(){
-        if(this.game.device.iOS)
-        {
-            game.sound.unlock();
-        }
+        game.sound.unlock();
         FB.getLoginStatus(function(response) {
             if (response.status == 'connected') {
                 // Logged into your app and Facebook.
