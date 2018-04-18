@@ -55,13 +55,6 @@ TH.MainMenu.prototype =
     preload: function()
     {
         
-    },
-    update: function()
-    {
-        if (game.input.activePointer.isDown)
-        {
-            game.sound.unlock();     
-        }
     }, 
     create: function()
     {         
