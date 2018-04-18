@@ -244,7 +244,8 @@ TH.Gameplay.prototype =
     },
     processAchievement: function(itemName)
     {
-        TH['\x61\x63\x68\x69\x65\x76\x65\x6d\x65\x6e\x74']['\x70\x75\x73\x68'](itemName);TH['\x68\x61\x73\x68\x4b\x65\x79']=md5(TH['\x61\x63\x68\x69\x65\x76\x65\x6d\x65\x6e\x74']['\x74\x6f\x53\x74\x72\x69\x6e\x67']());
+        TH.achievement.push(itemName);
+        TH.hashKey = md5(TH.achievement.toString());
     },
     bombCollisionHandler: function(bullet, item)
     {   
