@@ -286,6 +286,7 @@ TH.MainMenu.prototype =
                 TH.achievement = [];
                 TH.isPlayAgain = false;
                 TH.isGameOver = false;
+                TH.live = 3;
                 game.state.start('Gameplay');
             });      
         }          

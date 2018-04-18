@@ -201,10 +201,14 @@ TH.Gameplay.prototype =
                 if(item.name.startsWith('item'))
                 {
                     TH.live -= 1;
-                    if(TH.live === 2)
+                    if(TH.live == 2)
+                    {
                         live3.visible = false;
-                    else if(TH.live === 1)
+                    }                        
+                    else if(TH.live == 1)
+                    {
                         live2.visible = false;
+                    }                        
                     else if(TH.live <= 0)
                     {
                         live1.visible = false;    
