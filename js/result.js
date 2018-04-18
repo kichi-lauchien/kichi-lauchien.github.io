@@ -1,1 +1,292 @@
-var avatar1,avatar2,avatar3,highscore1,highscore2,highscore3,gcPopup,gcTitle,gcText,gcDesc,blurBg,dieukhoan,congratText,btnKhampha,btnChoiLai;TH.Result=function(){},TH.Result.prototype={init:function(){},preload:function(){},create:function(){if(0!=TH.score){if(md5(TH.achievement.toString())!=TH.hashKey)return;if(TH.score!=5*TH.achievement.length)return}var e={eventKey:"KICHI_HIGHSCORE_LB"};e.HIGHSCORE=TH.score,gamesparks.sendWithData("LogEventRequest",e,function(e){}),game.add.image(game.world.centerX,game.world.centerY,"result_bg").anchor.set(.5),game.add.image(game.world.centerX,230,"congrat").anchor.set(.5);var a=game.add.image(game.world.centerX,520,"score_bg");a.anchor.set(.5);var t=game.add.bitmapText(game.world.centerX,50,"marvin",TH.score,350);if(t.setText(TH.score),t.anchor.set(.5),t.x=a.x,t.y=a.y-50,TH.isPlayAgain){(r=game.add.image(game.world.centerX,game.world.centerY,"share_score_fb")).anchor.set(.5),r.inputEnabled=!0,r.events.onInputDown.add(this.onClickShareOnFB,this),(i=game.add.image(game.world.centerX,game.world.centerY+215,"get_code")).anchor.set(.5),i.inputEnabled=!0,i.events.onInputDown.add(this.onClickNhanQua,this)}else{var r,i,n=game.add.image(game.world.centerX,game.world.centerY-50,"share_with_friend");n.anchor.set(.5),n.inputEnabled=!0,n.events.onInputDown.add(this.onClickShareWF,this),(r=game.add.image(game.world.centerX,game.world.centerY+135,"share_score_fb")).anchor.set(.5),r.inputEnabled=!0,r.events.onInputDown.add(this.onClickShareOnFB,this),(i=game.add.image(game.world.centerX,game.world.centerY+320,"get_code")).anchor.set(.5),i.inputEnabled=!0,i.events.onInputDown.add(this.onClickNhanQua,this)}var c=game.add.image(game.world.centerX,game.world.height,"footer");c.anchor.set(.5),c.y-=c.height/2,(avatar1=game.add.image(game.world.centerX,game.world.height,"avatar")).anchor.set(.5),avatar1.x=c.centerX-285,avatar1.y=c.centerY-10,(highscore1=game.add.bitmapText(game.world.centerX,50,"marvin","",72)).anchor.set(.5),highscore1.x=avatar1.x,highscore1.y=avatar1.y+125,highscore1.tint=545410,(avatar2=game.add.image(game.world.centerX,game.world.height,"avatar")).anchor.set(.5),avatar2.x=c.centerX+10,avatar2.y=c.centerY-10,(highscore2=game.add.bitmapText(game.world.centerX,50,"marvin","",72)).anchor.set(.5),highscore2.x=avatar2.x,highscore2.y=avatar2.y+125,highscore2.tint=545410,(avatar3=game.add.image(game.world.centerX,game.world.height,"avatar")).anchor.set(.5),avatar3.x=c.centerX+295,avatar3.y=c.centerY-10,(highscore3=game.add.bitmapText(game.world.centerX,50,"marvin","",72)).anchor.set(.5),highscore3.x=avatar3.x,highscore3.y=avatar3.y+125,highscore3.tint=545410,gamesparks.leaderboardDataRequest(null,3,null,"KICHI_LB",0,null,function(e){e&&e.data&&e.data.length>0&&(e.data[0]&&(highscore1.setText(e.data[0].HIGHSCORE),FB.api("/"+e.data[0].externalIds.FB+"/picture?redirect=false&width=155&height=155","GET",{},function(e){var a=new Phaser.Loader(game);a.image("highscore1",e.data.url),a.onLoadComplete.addOnce(function(){avatar1.loadTexture("highscore1")}),a.start()})),e.data[1]&&(highscore2.setText(e.data[1].HIGHSCORE),FB.api("/"+e.data[1].externalIds.FB+"/picture?redirect=false&width=155&height=155","GET",{},function(e){var a=new Phaser.Loader(game);a.image("highscore2",e.data.url),a.onLoadComplete.addOnce(function(){avatar2.loadTexture("highscore2")}),a.start()})),e.data[2]&&(highscore3.setText(e.data[2].HIGHSCORE),FB.api("/"+e.data[2].externalIds.FB+"/picture?redirect=false&width=155&height=155","GET",{},function(e){var a=new Phaser.Loader(game);a.image("highscore3",e.data.url),a.onLoadComplete.addOnce(function(){avatar3.loadTexture("highscore3")}),a.start()})))}),(blurBg=game.add.image(game.world.centerX,game.world.centerY,"blur_bg")).anchor.set(.5),blurBg.scale.setTo(1,1),blurBg.inputEnabled=!0,(gcPopup=game.add.image(game.world.centerX,game.world.centerY,"gc_popup")).anchor.set(.5),gcPopup.scale.setTo(1,1),(gcTitle=game.add.image(game.world.centerX,game.world.centerY-370,"coca_title")).anchor.set(.5),gcTitle.scale.setTo(1,1),(gcDesc=game.add.image(game.world.centerX,game.world.centerY+265,"coca_desc")).anchor.set(.5),gcDesc.scale.setTo(1,1),(gcText=game.add.bitmapText(gcPopup.centerX,50,"marvin","COCA123456",85)).anchor.set(.5),gcText.y=gcTitle.centerX+250,gcText.tint=614809,(btnChoiLai=game.add.image(gcPopup.centerX-300,gcPopup.centerY+gcPopup.height/2+50,"play_again")).anchor.set(.5),(btnKhampha=game.add.image(gcPopup.centerX+300,gcPopup.centerY+gcPopup.height/2+50,"khampha_uudai")).anchor.set(.5),btnChoiLai.events.onInputDown.add(this.onClickBtnChoiLai,this),btnKhampha.events.onInputDown.add(this.onClickBtnKhamPhaUuDai,this),btnChoiLai.inputEnabled=!0,btnKhampha.inputEnabled=!0,gcPopup.inputEnabled=!0,gcPopup.visible=!1,gcText.visible=!1,gcTitle.visible=!1,btnChoiLai.visible=!1,btnKhampha.visible=!1,gcDesc.visible=!1,blurBg.visible=!1},onClickShareOnFB:function(){FB.ui({method:"share",href:"https://zzvutienhung.github.io/Kichi/",display:"popup"},function(e){})},onClickShareWF:function(){FB.ui({method:"share",href:"https://zzvutienhung.github.io/Kichi/",display:"popup"},function(e){TH.isGameOver=!1,TH.isPlayAgain=!0,game.state.start("Gameplay")})},onClickNhanQua:function(){if(TH.score<50)return window.alert("Bạn phải đạt trên 50 điểm để được nhận quà. hãy chơi lại nhé !!!"),void game.state.start("MainMenu");var e={eventKey:"REQUEST_GIFT_CODE"};e.SCORE=TH.score,e.USER_ID=TH.userId,gamesparks.sendWithData("LogEventRequest",e,function(e){gcPopup.visible=!0,gcText.visible=!0,gcTitle.visible=!0,btnChoiLai.visible=!0,btnKhampha.visible=!0,gcDesc.visible=!0,blurBg.visible=!0,gcText.setText(e.scriptData.data.code),e.scriptData.data.code.startsWith("COCA")?(gcTitle.loadTexture("coca_title"),gcDesc.loadTexture("coca_desc")):e.scriptData.data.code.startsWith("CRM")?(gcTitle.loadTexture("caramel_title"),gcDesc.loadTexture("caramel_desc")):e.scriptData.data.code.startsWith("DETO")?(gcTitle.loadTexture("detox_title"),gcDesc.loadTexture("detox_desc")):e.scriptData.data.code.startsWith("BFF")&&(gcTitle.loadTexture("buffet_title"),gcDesc.loadTexture("buffet_desc"))})},onClickBtnChoiLai:function(){TH.score=0,TH.isPlayAgain=!1,TH.isGameOver=!1,game.state.start("MainMenu")},onClickBtnKhamPhaUuDai:function(){window.open("http://kichi.com.vn/vi/ưu-dai/","_blank")}};
+
+
+TH.Result = function(){
+    
+};
+var avatar1, avatar2, avatar3;
+var highscore1, highscore2, highscore3;
+var gcPopup, gcTitle, gcText, gcDesc, blurBg;
+var dieukhoan, congratText;
+var btnKhampha, btnChoiLai;
+TH.Result.prototype = 
+{
+    init: function()
+    {
+    },
+    preload: function()
+    {
+    }, 
+    create: function()
+    {   
+        if(TH.score != 0)
+        {
+            if(md5(TH.achievement.toString()) != TH.hashKey)
+            {
+                return;
+            }
+            else
+            {
+                if(TH.score != (TH.achievement.length * 5))
+                {
+                    return;
+                }
+            }
+        }
+        
+        var request={};request['\x65\x76\x65\x6e\x74\x4b\x65\x79']='\x4b\x49\x43\x48\x49\x5f\x48\x49\x47\x48\x53\x43\x4f\x52\x45\x5f\x4c\x42';request['\x48\x49\x47\x48\x53\x43\x4f\x52\x45']=TH['\x73\x63\x6f\x72\x65'];gamesparks['\x73\x65\x6e\x64\x57\x69\x74\x68\x44\x61\x74\x61']('\x4c\x6f\x67\x45\x76\x65\x6e\x74\x52\x65\x71\x75\x65\x73\x74',request,function(_0x44f0e1){});
+
+        var bg = game.add.image(game.world.centerX, game.world.centerY, 'result_bg');
+        bg.anchor.set(0.5);
+        var congrat = game.add.image(game.world.centerX, 230, 'congrat');
+        congrat.anchor.set(0.5);
+        var score_bg = game.add.image(game.world.centerX, 520, 'score_bg');
+        score_bg.anchor.set(0.5);
+        var scoreText = game.add.bitmapText(game.world.centerX, 50, 'marvin', TH.score, 350);
+        scoreText.setText(TH.score);
+        scoreText.anchor.set(0.5);
+        scoreText.x = score_bg.x;
+        scoreText.y = score_bg.y-50;
+
+        if(!TH.isPlayAgain)
+        {
+            var shareWithFriend = game.add.image(game.world.centerX, game.world.centerY - 50, 'share_with_friend');
+            shareWithFriend.anchor.set(0.5);
+            shareWithFriend.inputEnabled = true;
+            shareWithFriend.events.onInputDown.add(this.onClickShareWF, this);
+
+            var shareOnFB = game.add.image(game.world.centerX, game.world.centerY + 135, 'share_score_fb');
+            shareOnFB.anchor.set(0.5);
+            shareOnFB.inputEnabled = true;
+            shareOnFB.events.onInputDown.add(this.onClickShareOnFB, this);            
+
+            var nhanqua = game.add.image(game.world.centerX, game.world.centerY + 320, 'get_code');
+            nhanqua.anchor.set(0.5);
+            nhanqua.inputEnabled = true;
+            nhanqua.events.onInputDown.add(this.onClickNhanQua, this);
+        }
+        else
+        {
+            var shareOnFB = game.add.image(game.world.centerX, game.world.centerY, 'share_score_fb');
+            shareOnFB.anchor.set(0.5);
+            shareOnFB.inputEnabled = true;
+            shareOnFB.events.onInputDown.add(this.onClickShareOnFB, this);            
+
+            var nhanqua = game.add.image(game.world.centerX, game.world.centerY + 215, 'get_code');
+            nhanqua.anchor.set(0.5);
+            nhanqua.inputEnabled = true;
+            nhanqua.events.onInputDown.add(this.onClickNhanQua, this);
+        }
+
+        var footer = game.add.image(game.world.centerX, game.world.height, 'footer');
+        footer.anchor.set(0.5);
+        footer.y -= footer.height/2;
+        avatar1 = game.add.image(game.world.centerX, game.world.height, 'avatar');
+        avatar1.anchor.set(0.5);
+        avatar1.x = footer.centerX - 285;
+        avatar1.y = footer.centerY - 10;
+
+        highscore1 = game.add.bitmapText(game.world.centerX, 50, 'marvin', '', 72);
+        highscore1.anchor.set(0.5);
+        highscore1.x = avatar1.x;
+        highscore1.y = avatar1.y+125;
+        highscore1.tint = 0x085282;
+
+        avatar2 = game.add.image(game.world.centerX, game.world.height, 'avatar');
+        avatar2.anchor.set(0.5);
+        avatar2.x = footer.centerX+10;
+        avatar2.y = footer.centerY - 10;
+        highscore2 = game.add.bitmapText(game.world.centerX, 50, 'marvin', '', 72);
+        highscore2.anchor.set(0.5);
+        highscore2.x = avatar2.x;
+        highscore2.y = avatar2.y+125;
+        highscore2.tint = 0x085282;
+
+        avatar3 = game.add.image(game.world.centerX, game.world.height, 'avatar');
+        avatar3.anchor.set(0.5);
+        avatar3.x = footer.centerX + 295;
+        avatar3.y = footer.centerY - 10;  
+        highscore3 = game.add.bitmapText(game.world.centerX, 50, 'marvin', '', 72);
+        highscore3.anchor.set(0.5);
+        highscore3.x = avatar3.x;
+        highscore3.y = avatar3.y+125;      
+        highscore3.tint = 0x085282;
+
+        gamesparks.leaderboardDataRequest(null, 3, null, "KICHI_LB", 0, null, function(response){
+            
+            if(response && response.data && response.data.length > 0)
+            {
+                if(response.data[0])
+                {
+                    highscore1.setText(response.data[0].HIGHSCORE);
+                    FB.api(
+                        '/'+ response.data[0].externalIds.FB + '/picture?redirect=false&width=155&height=155',
+                        'GET',
+                        {},
+                        function(gImgResponse) {
+                            var myLoader = new Phaser.Loader(game);
+                            myLoader.image('highscore1', gImgResponse.data.url );
+                            myLoader.onLoadComplete.addOnce(function(){
+                                avatar1.loadTexture('highscore1');
+                            });
+                            myLoader.start();                     
+                        }
+                    );
+                }
+                if(response.data[1])
+                {
+                    highscore2.setText(response.data[1].HIGHSCORE);
+                    FB.api(
+                        '/'+ response.data[1].externalIds.FB + '/picture?redirect=false&width=155&height=155',
+                        'GET',
+                        {},
+                        function(gImgResponse) {
+                            var myLoader = new Phaser.Loader(game);
+                            myLoader.image('highscore2', gImgResponse.data.url );
+                            myLoader.onLoadComplete.addOnce(function(){
+                                avatar2.loadTexture('highscore2');
+                            });
+                            myLoader.start();                     
+                        }
+                    );
+                }
+
+                if(response.data[2])
+                {
+                    highscore3.setText(response.data[2].HIGHSCORE);
+                    FB.api(
+                        '/'+ response.data[2].externalIds.FB + '/picture?redirect=false&width=155&height=155',
+                        'GET',
+                        {},
+                        function(gImgResponse) {
+                            var myLoader = new Phaser.Loader(game);
+                            myLoader.image('highscore3', gImgResponse.data.url );
+                            myLoader.onLoadComplete.addOnce(function(){
+                                avatar3.loadTexture('highscore3');
+                            });
+                            myLoader.start();                     
+                        }
+                    );
+                }
+            }
+        });
+
+        blurBg = game.add.image(game.world.centerX, game.world.centerY, 'blur_bg');
+        blurBg.anchor.set(0.5);
+        blurBg.scale.setTo(1, 1);
+        blurBg.inputEnabled = true;
+
+        gcPopup = game.add.image(game.world.centerX, game.world.centerY, 'gc_popup');
+        gcPopup.anchor.set(0.5);
+        gcPopup.scale.setTo(1, 1);
+        
+        gcTitle = game.add.image(game.world.centerX, game.world.centerY - 370, 'coca_title');
+        gcTitle.anchor.set(0.5);
+        gcTitle.scale.setTo(1, 1);
+
+        gcDesc = game.add.image(game.world.centerX, game.world.centerY + 265, 'coca_desc');
+        gcDesc.anchor.set(0.5);
+        gcDesc.scale.setTo(1, 1);
+
+        gcText = game.add.bitmapText(gcPopup.centerX, 50, 'marvin', 'COCA123456', 85);
+        gcText.anchor.set(0.5);
+        gcText.y = gcTitle.centerX + 250;
+        gcText.tint = 0x096199;
+        
+        btnChoiLai = game.add.image(gcPopup.centerX - 300, gcPopup.centerY + (gcPopup.height/2) + 50, 'play_again');
+        btnChoiLai.anchor.set(0.5);
+        btnKhampha = game.add.image(gcPopup.centerX + 300, gcPopup.centerY + (gcPopup.height/2) + 50, 'khampha_uudai');
+        btnKhampha.anchor.set(0.5);
+
+        btnChoiLai.events.onInputDown.add(this.onClickBtnChoiLai, this);
+        btnKhampha.events.onInputDown.add(this.onClickBtnKhamPhaUuDai, this);
+
+        btnChoiLai.inputEnabled = true;
+        btnKhampha.inputEnabled = true;
+        gcPopup.inputEnabled = true;
+
+        gcPopup.visible = false;
+        gcText.visible = false;
+        gcTitle.visible = false;
+        btnChoiLai.visible = false;
+        btnKhampha.visible = false;    
+        gcDesc.visible = false;
+        blurBg.visible = false;
+    },
+    onClickShareOnFB: function()
+    {
+        FB.ui({
+            method: 'share',
+            href: 'https://zzvutienhung.github.io/Kichi/',
+            display: 'popup'
+          }, function(response){});
+    },
+    onClickShareWF: function()
+    {
+        FB.ui({
+            method: 'share',
+            href: 'https://zzvutienhung.github.io/Kichi/',
+            display: 'popup'
+          }, function(response){
+            TH.isGameOver = false;
+            TH.isPlayAgain = true;
+            game.state.start('Gameplay');
+          });
+    },
+    onClickNhanQua: function()
+    {
+        if(TH.score < 50)
+        {
+            window.alert('Bạn phải đạt trên 50 điểm để được nhận quà. hãy chơi lại nhé !!!');
+            game.state.start('MainMenu');
+            return;
+        }
+        var request = {};
+        request["eventKey"] = "REQUEST_GIFT_CODE";
+        request["SCORE"] = TH.score;
+        request["USER_ID"] = TH.userId;
+        gamesparks.sendWithData("LogEventRequest", request, function(response){
+            //show get code popup
+            gcPopup.visible = true;
+            gcText.visible = true;
+            gcTitle.visible = true;
+            btnChoiLai.visible = true;
+            btnKhampha.visible = true;  
+            gcDesc.visible = true;
+            blurBg.visible = true;
+            gcText.setText(response.scriptData.data.code);
+            if(response.scriptData.data.code.startsWith("COCA"))
+            {
+                gcTitle.loadTexture("coca_title");
+                gcDesc.loadTexture("coca_desc");
+            }
+            else if(response.scriptData.data.code.startsWith("CRM"))
+            {
+                gcTitle.loadTexture("caramel_title");
+                gcDesc.loadTexture("caramel_desc");
+            }
+            else if(response.scriptData.data.code.startsWith("DETO"))
+            {
+                gcTitle.loadTexture("detox_title");
+                gcDesc.loadTexture("detox_desc");
+            }
+            else if(response.scriptData.data.code.startsWith("BFF"))
+            {
+                gcTitle.loadTexture("buffet_title");
+                gcDesc.loadTexture("buffet_desc");
+            }
+        });
+    },
+    onClickBtnChoiLai: function()
+    {
+        TH.score = 0;
+        TH.isPlayAgain = false;
+        TH.isGameOver = false;
+        game.state.start('MainMenu');
+    },
+    onClickBtnKhamPhaUuDai: function()
+    {
+        window.open("http://kichi.com.vn/vi/ưu-dai/", "_blank");
+    }
+};
+
+
