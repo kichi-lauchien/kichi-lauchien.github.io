@@ -60,7 +60,7 @@ TH.Preloader.prototype =
         this.load.image('gift', 'assets/gift.png');
         this.load.image('score_bg', 'assets/score_bg.png');
         this.load.bitmapFont('marvin', 'fonts/Marvin/Marvin_0.png', 'fonts/Marvin/Marvin.xml');
-        this.load.bitmapFont('spaceComics', 'fonts/SpaceComics_0.png', 'fonts/SpaceComics.xml');
+        this.load.bitmapFont('spaceComics', 'fonts/SpaceComic_0.png', 'fonts/SpaceComic.xml');
         this.load.image('ingame_bg', 'assets/ingame_bg.png');
         this.load.image('top_bar', 'assets/top_bar.png');
         this.load.image('live', 'assets/live.png');
