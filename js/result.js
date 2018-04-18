@@ -216,7 +216,7 @@ TH.Result.prototype =
     {
         FB.ui({
             method: 'share',
-            href: 'https://zzvutienhung.github.io/Kichi/',
+            href: 'https://kichi-lauchien.github.io',
             display: 'popup'
           }, function(response){});
     },
@@ -224,7 +224,7 @@ TH.Result.prototype =
     {
         FB.ui({
             method: 'share',
-            href: 'https://zzvutienhung.github.io/Kichi/',
+            href: 'https://kichi-lauchien.github.io',
             display: 'popup'
           }, function(response){
             TH.isGameOver = false;
