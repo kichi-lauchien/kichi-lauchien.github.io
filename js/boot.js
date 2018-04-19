@@ -23,11 +23,11 @@ TH.Boot.prototype =
         game.load.crossOrigin = 'anonymous';
         this.input.maxPointers = 1;
         game.time.advancedTiming = true;
-        this.scale.pageAlignHorizontally = true;
+        //this.scale.pageAlignHorizontally = true;
         // Maintain aspect ratio
         game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;      
         game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-        game.scale.setMaximum();
+        //game.scale.setMaximum();
         game.scale.refresh();
         
         gamesparks = new GameSparks();
