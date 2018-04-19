@@ -127,14 +127,6 @@ TH.Gameplay.prototype =
             this.fire();        
         }
 
-        if(spacebarKey.isDown)
-        {
-            var allTweens = game.tweens.getAll();  
-            allTweens.forEach(element => {
-                element.reverse = !element.reverse;
-            });
-        }
-
         game.physics.arcade.overlap(bullets, items, this.collisionHandler, null, this);
         game.physics.arcade.overlap(bullets, bombs, this.bombCollisionHandler, null, this);
     },
