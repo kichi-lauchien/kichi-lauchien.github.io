@@ -37,7 +37,7 @@ TH.Gameplay.prototype =
         var bg = game.add.image(game.world.centerX, game.world.centerY, 'ingame_bg');
         bg.anchor.set(0.5);
         nextFire = 0;
-        fireRate = 400;
+        fireRate = 100;
         
         // Create a custom timer
         timer = game.time.create();        
