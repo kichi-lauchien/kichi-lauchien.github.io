@@ -218,6 +218,7 @@ TH.MainMenu.prototype =
         instance.rule_close.events.onInputDown.add(instance.onCloseRulePopup, instance);
         instance.onCloseRulePopup();
         FB.getLoginStatus(function(response) {
+			console.log(JSON.stringify(response));
             if (response.status == 'connected') {
                 // Logged into your app and Facebook.
                 TH.fbAccessToken = response.authResponse.accessToken;
