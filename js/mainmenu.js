@@ -233,13 +233,29 @@ TH.MainMenu.prototype =
                     }
                 );
             }
-        }, true);
+        });
     },
     onClickOnBtnFB: function(){
         game.sound.unlock();
-        FB.login(function(response) {
-		  
-		}, {scope: 'public_profile,email'});
+        FB.getLoginStatus(function(response) {
+            if (response.status == 'connected') {
+                // Logged into your app and Facebook.
+                TH.fbAccessToken = response.authResponse.accessToken;
+                fbBtn.visible = false;
+                TH.MainMenu.playButton.visible = true;
+                FB.api(
+                    '/me',
+                    'GET',
+                    {"fields":"id,name"},
+                    function(response) {
+                        TH.fbUserName = response.name;
+                    }
+                );
+            } else {
+                var uri = encodeURI("https://kichi-lauchien.github.io/");
+                window.location = encodeURI("https://www.facebook.com/dialog/oauth?client_id=158000174877255&redirect_uri="+uri+"&response_type=token");
+            }
+        });     
     },
     onClickOnBtnPlay: function(){    
         if(!TH.fbAccessToken)
