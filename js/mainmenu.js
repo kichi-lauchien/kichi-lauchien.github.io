@@ -233,7 +233,7 @@ TH.MainMenu.prototype =
                     }
                 );
             }
-        });
+        }, true);
     },
     onClickOnBtnFB: function(){
         game.sound.unlock();
