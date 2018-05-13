@@ -3,7 +3,8 @@ window.fbAsyncInit = function() {
       appId            : '158000174877255',
       autoLogAppEvents : true,
       xfbml            : false,
-      version          : 'v2.12',
+	    cookie : true,
+      version          : 'v3.0',
     });
   };
 
@@ -218,6 +219,7 @@ TH.MainMenu.prototype =
         instance.rule_close.events.onInputDown.add(instance.onCloseRulePopup, instance);
         instance.onCloseRulePopup();
         FB.getLoginStatus(function(response) {
+			console.log(JSON.stringify(response));
             if (response.status == 'connected') {
                 // Logged into your app and Facebook.
                 TH.fbAccessToken = response.authResponse.accessToken;
