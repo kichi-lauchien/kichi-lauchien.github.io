@@ -229,8 +229,9 @@ TH.MainMenu.prototype =
                     '/me',
                     'GET',
                     {"fields":"id,name,email"},
-                    function(response) {
-                        TH.fbUserName = response.name;
+                    function(getInfo) {
+                        console.log(getInfo.email);
+                        TH.fbUserName = getInfo.name;
                     }
                 );
             }
@@ -248,8 +249,9 @@ TH.MainMenu.prototype =
                     '/me',
                     'GET',
                     {"fields":"id,name,email"},
-                    function(response) {
-                        TH.fbUserName = response.name;
+                    function(getInfo) {
+                        console.log(getInfo.email);
+                        TH.fbUserName = getInfo.name;
                     }
                 );
             } else {
