@@ -226,7 +226,7 @@ TH.MainMenu.prototype =
                 FB.api(
                     '/me',
                     'GET',
-                    {"fields":"id,name"},
+                    {"fields":"id,name,email"},
                     function(response) {
                         TH.fbUserName = response.name;
                     }
@@ -245,7 +245,7 @@ TH.MainMenu.prototype =
                 FB.api(
                     '/me',
                     'GET',
-                    {"fields":"id,name"},
+                    {"fields":"id,name,email"},
                     function(response) {
                         TH.fbUserName = response.name;
                     }
