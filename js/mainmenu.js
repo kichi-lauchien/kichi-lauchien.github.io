@@ -231,9 +231,8 @@ TH.MainMenu.prototype =
                         {"fields":"id,name,email"},
                         function(getInfo) {
                             var eRequest = {};
-                            eRequest["EMAIL"] = getInfo.email;
-                            eRequest["USER_ID"] = TH.userId;
                             eRequest["eventKey"] = "UpdateUserEmail";
+                            eRequest["EMAIL"] = getInfo.email;                            
                             gamesparks.sendWithData("LogEventRequest", eRequest, function(eRes){
                             });
                             TH.fbUserName = getInfo.name;
