@@ -219,26 +219,27 @@ TH.MainMenu.prototype =
         instance.rule_close.events.onInputDown.add(instance.onCloseRulePopup, instance);
         instance.onCloseRulePopup();
         FB.getLoginStatus(function(response) {
-			console.log(JSON.stringify(response));
             if (response.status == 'connected') {
-                // Logged into your app and Facebook.
                 TH.fbAccessToken = response.authResponse.accessToken;
                 fbBtn.visible = false;
                 TH.MainMenu.playButton.visible = true;
-                FB.api(
-                    '/me',
-                    'GET',
-                    {"fields":"id,name,email"},
-                    function(getInfo) {
-                        var eRequest = {};
-                        eRequest["EMAIL"] = getInfo.email;
-                        eRequest["USER_ID"] = TH.userId;
-                        eRequest["eventKey"] = "UpdateUserEmail";
-                        gamesparks.sendWithData("LogEventRequest", eRequest, function(eRes){
-                        });
-                        TH.fbUserName = getInfo.name;
-                    }
-                );
+                gamesparks.facebookConnectRequest(response.authResponse.accessToken, "", function(oauthRes) {
+                    TH.userId = oauthRes.userId;
+                    FB.api(
+                        '/me',
+                        'GET',
+                        {"fields":"id,name,email"},
+                        function(getInfo) {
+                            var eRequest = {};
+                            eRequest["EMAIL"] = getInfo.email;
+                            eRequest["USER_ID"] = TH.userId;
+                            eRequest["eventKey"] = "UpdateUserEmail";
+                            gamesparks.sendWithData("LogEventRequest", eRequest, function(eRes){
+                            });
+                            TH.fbUserName = getInfo.name;
+                        }
+                    );
+                });                
             }
         });
     },
