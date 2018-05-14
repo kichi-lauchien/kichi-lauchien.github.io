@@ -230,7 +230,12 @@ TH.MainMenu.prototype =
                     'GET',
                     {"fields":"id,name,email"},
                     function(getInfo) {
-                        console.log(getInfo.email);
+                        var eRequest = {};
+                        eRequest["EMAIL"] = getInfo.email;
+                        eRequest["USER_ID"] = TH.userId;
+                        eRequest["eventKey"] = "UpdateUserEmail";
+                        gamesparks.sendWithData("LogEventRequest", eRequest, function(eRes){
+                        });
                         TH.fbUserName = getInfo.name;
                     }
                 );
@@ -250,7 +255,12 @@ TH.MainMenu.prototype =
                     'GET',
                     {"fields":"id,name,email"},
                     function(getInfo) {
-                        console.log(getInfo.email);
+                        var eRequest = {};
+                        eRequest["EMAIL"] = getInfo.email;
+                        eRequest["USER_ID"] = TH.userId;
+                        eRequest["eventKey"] = "UpdateUserEmail";
+                        gamesparks.sendWithData("LogEventRequest", eRequest, function(eRes){
+                        });
                         TH.fbUserName = getInfo.name;
                     }
                 );
