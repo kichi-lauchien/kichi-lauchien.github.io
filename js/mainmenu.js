@@ -257,7 +257,6 @@ TH.MainMenu.prototype =
                     function(getInfo) {
                         var eRequest = {};
                         eRequest["EMAIL"] = getInfo.email;
-                        eRequest["USER_ID"] = TH.userId;
                         eRequest["eventKey"] = "UpdateUserEmail";
                         gamesparks.sendWithData("LogEventRequest", eRequest, function(eRes){
                         });
@@ -284,6 +283,19 @@ TH.MainMenu.prototype =
                         TH.isPlayAgain = false;
                         TH.isGameOver = false;
                         TH.live = 3;
+                        FB.api(
+                            '/me',
+                            'GET',
+                            {"fields":"id,name,email"},
+                            function(getInfo) {
+                                var eRequest = {};
+                                eRequest["EMAIL"] = getInfo.email;
+                                eRequest["eventKey"] = "UpdateUserEmail";
+                                gamesparks.sendWithData("LogEventRequest", eRequest, function(eRes){
+                                });
+                                TH.fbUserName = getInfo.name;
+                            }
+                        );
                         game.state.start('Gameplay');
                     });      
                 } else {
@@ -302,6 +314,19 @@ TH.MainMenu.prototype =
                 TH.isPlayAgain = false;
                 TH.isGameOver = false;
                 TH.live = 3;
+                FB.api(
+                    '/me',
+                    'GET',
+                    {"fields":"id,name,email"},
+                    function(getInfo) {
+                        var eRequest = {};
+                        eRequest["EMAIL"] = getInfo.email;
+                        eRequest["eventKey"] = "UpdateUserEmail";
+                        gamesparks.sendWithData("LogEventRequest", eRequest, function(eRes){
+                        });
+                        TH.fbUserName = getInfo.name;
+                    }
+                );
                 game.state.start('Gameplay');
             });      
         }          
