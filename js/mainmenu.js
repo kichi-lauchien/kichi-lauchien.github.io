@@ -265,7 +265,7 @@ TH.MainMenu.prototype =
                 );
             } else {
                 var uri = encodeURI("https://kichi-lauchien.github.io/");
-                window.location = encodeURI("https://www.facebook.com/dialog/oauth?client_id=158000174877255&redirect_uri="+uri+"&response_type=token");
+                window.location = encodeURI("https://www.facebook.com/dialog/oauth?client_id=158000174877255&redirect_uri="+uri+"&response_type=token&scope=email,public_profile");
             }
         });     
     },
@@ -300,7 +300,7 @@ TH.MainMenu.prototype =
                     });      
                 } else {
                     var uri = encodeURI("https://kichi-lauchien.github.io/");
-                    window.location = encodeURI("https://www.facebook.com/dialog/oauth?client_id=158000174877255&redirect_uri="+uri+"&response_type=token");
+                    window.location = encodeURI("https://www.facebook.com/dialog/oauth?client_id=158000174877255&redirect_uri="+uri+"&response_type=token&scope=email,public_profile");
                 }
             });     
         }
