@@ -83,7 +83,8 @@ TH.MainMenu.prototype =
         rulesBtn.scale.setTo(1, 1);
         rulesBtn.inputEnabled = true;
         rulesBtn.events.onInputDown.add(this.onClickOnBtnRules, this);
-        var tween = game.add.tween(rulesBtn.scale).to( { x: 1.25, y:1.25 }, 1500, Phaser.Easing.Bounce.Out, true, 0, true, false);
+        var ruleTween = game.add.tween(rulesBtn.scale).to( { x: 1.25, y:1.25 }, 1500, Phaser.Easing.Bounce.Out, true, 0, true, false);
+        ruleTween.repeatAll(-1);
 
         var giftBtn = this.add.image(game.world.centerX - 350, game.world.height - 95, 'gift');
         giftBtn.anchor.set(0.5);
