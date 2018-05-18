@@ -83,6 +83,7 @@ TH.MainMenu.prototype =
         rulesBtn.scale.setTo(1, 1);
         rulesBtn.inputEnabled = true;
         rulesBtn.events.onInputDown.add(this.onClickOnBtnRules, this);
+        var tween = game.add.tween(rulesBtn.scale).to( { x: 1.25, y:1.25 }, 1500, Phaser.Easing.Bounce.Out, true, 0, true, false);
 
         var giftBtn = this.add.image(game.world.centerX - 350, game.world.height - 95, 'gift');
         giftBtn.anchor.set(0.5);
@@ -214,7 +215,7 @@ TH.MainMenu.prototype =
         instance.rule_close = game.add.image(game.world.centerX + instance.rule_bg.width / 2 - 75, game.world.centerY - instance.rule_bg.height / 2 + 100, 'btnClose');
         instance.rule_close.anchor.set(0.5);
         instance.rule_close.scale.setTo(1, 1);
-        
+       
         instance.rule_close.inputEnabled = true;
         instance.rule_close.events.onInputDown.add(instance.onCloseRulePopup, instance);
         instance.onCloseRulePopup();
