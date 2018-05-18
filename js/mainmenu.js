@@ -223,7 +223,7 @@ TH.MainMenu.prototype =
                 TH.fbAccessToken = response.authResponse.accessToken;
                 fbBtn.visible = false;
                 TH.MainMenu.playButton.visible = true;
-                gamesparks.facebookConnectRequest(response.authResponse.accessToken, "", function(oauthRes) {
+                gamesparks.facebookConnectRequest(response.authResponse.accessToken, function(oauthRes) {
                     TH.userId = oauthRes.userId;
                     FB.api(
                         '/me',
@@ -275,7 +275,7 @@ TH.MainMenu.prototype =
             FB.getLoginStatus(function(response) {
                 if (response.status == 'connected') {
                     TH.fbAccessToken = response.authResponse.accessToken;
-                    gamesparks.facebookConnectRequest(response.authResponse.accessToken, "", function(response) {
+                    gamesparks.facebookConnectRequest(response.authResponse.accessToken, function(response) {
                         TH.userId = response.userId;
                         TH.score = 0;
                         TH.hashKey = '';
@@ -306,7 +306,7 @@ TH.MainMenu.prototype =
         }
         else
         {
-            gamesparks.facebookConnectRequest(TH.fbAccessToken, "", function(response) {
+            gamesparks.facebookConnectRequest(TH.fbAccessToken, function(response) {
                 TH.userId = response.userId;
                 TH.score = 0;
                 TH.hashKey = '';
@@ -386,7 +386,7 @@ TH.MainMenu.prototype =
     },
     gamesparksFacebookAuthenticate : function(tokenFB, displayName)
     {
-        gamesparks.facebookConnectRequest(tokenFB, "", function(response) {
+        gamesparks.facebookConnectRequest(tokenFB, function(response) {
             TH.userId = response.userId;
         });
     },
