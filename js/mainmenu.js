@@ -83,6 +83,8 @@ TH.MainMenu.prototype =
         rulesBtn.scale.setTo(1, 1);
         rulesBtn.inputEnabled = true;
         rulesBtn.events.onInputDown.add(this.onClickOnBtnRules, this);
+        var ruleTween = game.add.tween(rulesBtn.scale).to( { x: 1.25, y:1.25 }, 1500, Phaser.Easing.Bounce.Out, true, 0, true, false);
+        ruleTween.repeatAll(-1);
 
         var giftBtn = this.add.image(game.world.centerX - 350, game.world.height - 95, 'gift');
         giftBtn.anchor.set(0.5);
@@ -214,26 +216,31 @@ TH.MainMenu.prototype =
         instance.rule_close = game.add.image(game.world.centerX + instance.rule_bg.width / 2 - 75, game.world.centerY - instance.rule_bg.height / 2 + 100, 'btnClose');
         instance.rule_close.anchor.set(0.5);
         instance.rule_close.scale.setTo(1, 1);
-        
+       
         instance.rule_close.inputEnabled = true;
         instance.rule_close.events.onInputDown.add(instance.onCloseRulePopup, instance);
         instance.onCloseRulePopup();
         FB.getLoginStatus(function(response) {
-			console.log(JSON.stringify(response));
             if (response.status == 'connected') {
-                // Logged into your app and Facebook.
                 TH.fbAccessToken = response.authResponse.accessToken;
                 fbBtn.visible = false;
                 TH.MainMenu.playButton.visible = true;
-                FB.api(
-                    '/me',
-                    'GET',
-                    {"fields":"id,name,email"},
-                    function(getInfo) {
-                        console.log(getInfo.email);
-                        TH.fbUserName = getInfo.name;
-                    }
-                );
+                gamesparks.facebookConnectRequest(response.authResponse.accessToken, function(oauthRes) {
+                    TH.userId = oauthRes.userId;
+                    FB.api(
+                        '/me',
+                        'GET',
+                        {"fields":"id,name,email"},
+                        function(getInfo) {
+                            var eRequest = {};
+                            eRequest["eventKey"] = "UpdateUserEmail";
+                            eRequest["EMAIL"] = getInfo.email;                            
+                            gamesparks.sendWithData("LogEventRequest", eRequest, function(eRes){
+                            });
+                            TH.fbUserName = getInfo.name;
+                        }
+                    );
+                });                
             }
         });
     },
@@ -250,13 +257,17 @@ TH.MainMenu.prototype =
                     'GET',
                     {"fields":"id,name,email"},
                     function(getInfo) {
-                        console.log(getInfo.email);
+                        var eRequest = {};
+                        eRequest["EMAIL"] = getInfo.email;
+                        eRequest["eventKey"] = "UpdateUserEmail";
+                        gamesparks.sendWithData("LogEventRequest", eRequest, function(eRes){
+                        });
                         TH.fbUserName = getInfo.name;
                     }
                 );
             } else {
                 var uri = encodeURI("https://kichi-lauchien.github.io/");
-                window.location = encodeURI("https://www.facebook.com/dialog/oauth?client_id=158000174877255&redirect_uri="+uri+"&response_type=token");
+                window.location = encodeURI("https://www.facebook.com/dialog/oauth?client_id=158000174877255&redirect_uri="+uri+"&response_type=token&scope=email,public_profile");
             }
         });     
     },
@@ -266,7 +277,7 @@ TH.MainMenu.prototype =
             FB.getLoginStatus(function(response) {
                 if (response.status == 'connected') {
                     TH.fbAccessToken = response.authResponse.accessToken;
-                    gamesparks.facebookConnectRequest(response.authResponse.accessToken, "", function(response) {
+                    gamesparks.facebookConnectRequest(response.authResponse.accessToken, function(response) {
                         TH.userId = response.userId;
                         TH.score = 0;
                         TH.hashKey = '';
@@ -274,17 +285,30 @@ TH.MainMenu.prototype =
                         TH.isPlayAgain = false;
                         TH.isGameOver = false;
                         TH.live = 3;
+                        FB.api(
+                            '/me',
+                            'GET',
+                            {"fields":"id,name,email"},
+                            function(getInfo) {
+                                var eRequest = {};
+                                eRequest["EMAIL"] = getInfo.email;
+                                eRequest["eventKey"] = "UpdateUserEmail";
+                                gamesparks.sendWithData("LogEventRequest", eRequest, function(eRes){
+                                });
+                                TH.fbUserName = getInfo.name;
+                            }
+                        );
                         game.state.start('Gameplay');
                     });      
                 } else {
                     var uri = encodeURI("https://kichi-lauchien.github.io/");
-                    window.location = encodeURI("https://www.facebook.com/dialog/oauth?client_id=158000174877255&redirect_uri="+uri+"&response_type=token");
+                    window.location = encodeURI("https://www.facebook.com/dialog/oauth?client_id=158000174877255&redirect_uri="+uri+"&response_type=token&scope=email,public_profile");
                 }
             });     
         }
         else
         {
-            gamesparks.facebookConnectRequest(TH.fbAccessToken, "", function(response) {
+            gamesparks.facebookConnectRequest(TH.fbAccessToken, function(response) {
                 TH.userId = response.userId;
                 TH.score = 0;
                 TH.hashKey = '';
@@ -292,6 +316,19 @@ TH.MainMenu.prototype =
                 TH.isPlayAgain = false;
                 TH.isGameOver = false;
                 TH.live = 3;
+                FB.api(
+                    '/me',
+                    'GET',
+                    {"fields":"id,name,email"},
+                    function(getInfo) {
+                        var eRequest = {};
+                        eRequest["EMAIL"] = getInfo.email;
+                        eRequest["eventKey"] = "UpdateUserEmail";
+                        gamesparks.sendWithData("LogEventRequest", eRequest, function(eRes){
+                        });
+                        TH.fbUserName = getInfo.name;
+                    }
+                );
                 game.state.start('Gameplay');
             });      
         }          
@@ -351,7 +388,7 @@ TH.MainMenu.prototype =
     },
     gamesparksFacebookAuthenticate : function(tokenFB, displayName)
     {
-        gamesparks.facebookConnectRequest(tokenFB, "", function(response) {
+        gamesparks.facebookConnectRequest(tokenFB, function(response) {
             TH.userId = response.userId;
         });
     },

@@ -114,11 +114,10 @@ GameSparks.prototype.endSessionRequest = function(onResponse )
     var request = {};
     gamesparks.sendWithData("EndSessionRequest", request, onResponse);
 }
-GameSparks.prototype.facebookConnectRequest = function(accessToken, code, onResponse )
+GameSparks.prototype.facebookConnectRequest = function(accessToken, onResponse )
 {
     var request = {};
-		request["accessToken"] = accessToken;
-		request["code"] = code;
+	request["accessToken"] = accessToken;
     gamesparks.sendWithData("FacebookConnectRequest", request, onResponse);
 }
 GameSparks.prototype.findChallengeRequest = function(accessType, count, offset, onResponse )
